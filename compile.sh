@@ -13,7 +13,7 @@ rustc --crate-type=lib --emit obj -o ../bin/kernel.o s3/kernel.rs
 
 # Link
 cd ../
-ld -o bin/kernel.tmp -Ttext 0x7e00 bin/extended_space.o bin/kernel.o
+ld -o bin/kernel.tmp -Ttext 0x8000 bin/extended_space.o bin/kernel.o
 objcopy -O binary bin/kernel.tmp bin/kernel.bin
 
 cat bin/bootloader.bin bin/kernel.bin > out/weirdos.flp
