@@ -1,11 +1,5 @@
-[org 0x7e00]
-
-mov bx, enabling_32bit
-call BiosPrint
-
 jmp EnterProtectedMode
 
-%include "lib/print.asm"
 %include "s2/gdt.asm"
 
 EnterProtectedMode:
@@ -44,13 +38,16 @@ StartProtectedMode:
 
 
     jmp codeseg:Start64Bit
+    jmp $
 
 [bits 64]
+[extern _start]
 Start64Bit:
     mov edi, 0xb8000
     mov rax, 0x1f201f201f201f20
     mov ecx, 500
     rep stosq
+    call _start
     jmp $
 
 section .data
